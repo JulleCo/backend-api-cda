@@ -1,8 +1,14 @@
+import BookRouter from '../api/book/route';
+
+const apiBaseURL = process.env.API_BASE_URL || '/api/v1/';
+
 const Router = (app) => {
   //Our first route is here
-  app.get('/', (request, response) => {
-    response.json({ message: 'Hello world !' });
+  app.get('/', (req, res) => {
+    res.json({ message: 'Hello world !' });
   });
+
+  app.use(`${apiBaseURL}books `, BookRouter);
 };
 
 export default Router;

@@ -1,5 +1,8 @@
 import { createServer } from './app/server';
 import { PORT } from './config/server';
+import databaseOptions from './config/database';
+
+console.log('database options', databaseOptions);
 
 //Initializing our app server with express
 createServer().then((server) => {
