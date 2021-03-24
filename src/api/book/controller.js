@@ -1,21 +1,33 @@
 import bookService from './service';
 
 class BookController {
-  //   constructor() {
-  //     this.bookService = new BookService();
-  //   }
+  async get(req, res) {
+    const books = await bookService.get();
 
-  get(req, res) {
-    const books = bookService.get();
-
-    if (!books || books.length > 0) {
-      return res.json({ message: 'Sorry no books found' });
+    if (!books) {
+      return res.json({ message: 'Sorry no book found' });
     }
 
-    return res.json(books);
+    return res.status(200).json(books);
   }
 
-  getAuthor() {}
+  async post(req, res) {
+    let newBook = {
+      title: req.body.title,
+      description: req.body.description,
+      published: req.body.published
+    };
+
+    const addBook = await bookService.post(newBook);
+
+    if (!addBook) {
+      return res.json({ message: 'Error book was not add to the database' });
+    }
+
+    return res.status(200).json(addBook);
+  }
+
+  getIfPublished(req, res) {}
 }
 
 export default BookController;

@@ -9,9 +9,9 @@ import swaggerOptions from '../../swagger.json';
 export const createServer = async () => {
   const server = express();
 
-  server.use(morgan('tiny'));
-
   server.use(express.json());
+
+  server.use(morgan('tiny'));
 
   router(server);
 

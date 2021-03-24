@@ -1,18 +1,18 @@
+import db from '../../app/database';
+
 class BookService {
   constructor() {}
 
-  get() {
-    //let books = [];
+  async get() {
+    let books = await db.books.findAll({
+      attributes: ['title', 'published', 'description']
+    });
 
-    let books = [
-      {
-        title: 'les misérables'
-      },
-      {
-        title: 'La horde du contrevent'
-      }
-    ];
+    return books;
+  }
 
+  async post(addBook) {
+    let books = await db.books.create(addBook);
     return books;
   }
 }
